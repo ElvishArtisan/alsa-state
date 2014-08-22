@@ -5,3 +5,5 @@
 	* Changed the chkconfig start priority to 99 in 'rc.alsa-state'.
 	* Changed the chkconfig stop priority to 99 in 'rc.alsa-state'.
 	* Removed the LSB header from 'rc.alsa-state'.
+2014-08-21 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 0.9.1.

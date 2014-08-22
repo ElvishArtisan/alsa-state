@@ -19,7 +19,7 @@ dnl   License along with this program; if not, write to the Free Software
 dnl   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 dnl
 
-AC_INIT(alsa-state,0.9.0)
+AC_INIT(alsa-state,0.9.1)
 AM_INIT_AUTOMAKE
 AC_SUBST(RPM_RELEASE,1)
 
