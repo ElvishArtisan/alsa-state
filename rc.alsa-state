@@ -1,0 +1,81 @@
+#! /bin/sh
+##
+## Init script for saving and restoring ALSA mixer settings
+##
+## (C) Copyright 2014 Fred Gleason <fredg@paravelsystems.com>
+##
+##    This program is free software; you can redistribute it and/or modify
+##    it under the terms of version 2 of the GNU General Public License as
+##    published by the Free Software Foundation;
+##
+##    This program is distributed in the hope that it will be useful,
+##    but WITHOUT ANY WARRANTY; without even the implied warranty of
+##    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##    GNU General Public License for more details.
+##
+##    You should have received a copy of the GNU General Public License
+##    along with this program; if not, write to the Free Software
+##    Foundation, Inc., 59 Temple Place, Suite 330, 
+##    Boston, MA  02111-1307  USA
+##
+
+# chkconfig: 235 65 35
+# description: Save/Restore ALSA mixer settings
+# config: /etc/asound.state
+
+### BEGIN INIT INFO
+# Provides:          alsa-state
+# Required-Start:    $remote_fs
+# Required-Stop:     $remote_fs
+# Default-Start:     2 3 5
+# Default-Stop:      0 1 6
+# Description:       Save/Restore ALSA mixer settings
+### END INIT INFO
+
+function RestoreSettings {
+  if test -f /etc/asound.state ; then
+    alsactl restore
+    log_success_msg "Restored ALSA mixer settings."
+    exit 0
+  else
+    log_failure_msg "Restored ALSA mixer settings."
+    exit 1
+  fi
+}
+
+#
+# If the LSB Init functions exist, use them, otherwise roll our own
+#
+if test -f /lib/lsb/init-functions ; then
+  . /lib/lsb/init-functions
+else
+  function log_success_msg() {
+    echo "$1 ... done."
+  }
+  function log_failure_msg() {
+    echo "$1 ... done."
+  }
+fi
+
+# Set path for script functions
+export PATH=$PATH:/usr/local/bin:/usr/local/sbin
+
+case "$1" in
+    start)
+        RestoreSettings
+	;;
+    stop)
+        alsactl store
+	log_success_msg "Saved ALSA mixer settings."
+        exit 0
+	;;
+    reload)
+        RestoreSettings
+	;;
+    status)
+        exit 0
+	;;
+esac
+
+
+# End of rc.alsa-state

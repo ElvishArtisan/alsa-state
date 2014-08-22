@@ -1,0 +1,4 @@
+This is the README for the alsa-state package.
+
+Alsa-state is an init script for saving and restoring the state of the
+ALSA mixer at system shutdown and startup.
