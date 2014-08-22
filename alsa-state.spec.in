@@ -1,0 +1,54 @@
+Name:		alsa-state
+Version:	@VERSION@
+Release:	@RPM_RELEASE@%{?dist}
+Summary:	Init script for saving and restoring ALSA mixer settings
+Group:		System Environment/Base
+License:	GPLv2
+Source0:	%{name}-%{version}.tar.gz
+Requires:	alsa-utils
+BuildArch:	noarch
+
+
+%description
+Alsa-state is an init script for saving and restoring the state of the
+ALSA mixer at system shutdown and startup.
+
+
+%prep
+
+
+%setup
+
+
+%build
+%configure
+
+
+%install
+rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT/etc/init.d
+cp rc.alsa-state -p $RPM_BUILD_ROOT/etc/init.d/alsa-state
+
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+
+%post
+chkconfig alsa-state on
+
+
+%preun
+chkconfig alsa-state off
+
+
+%files
+%defattr(-,root,root,-)
+/etc/init.d/alsa-state
+%doc COPYING
+%doc README
+
+
+%changelog
+* Thu Aug 21 2014 Fred Gleason <fredg@paravelsystems.com> - 0.9.0-1
+-- Initial RPM.
