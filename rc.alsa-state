@@ -19,18 +19,9 @@
 ##    Boston, MA  02111-1307  USA
 ##
 
-# chkconfig: 235 65 35
+# chkconfig: 235 99 01
 # description: Save/Restore ALSA mixer settings
 # config: /etc/asound.state
-
-### BEGIN INIT INFO
-# Provides:          alsa-state
-# Required-Start:    $remote_fs
-# Required-Stop:     $remote_fs
-# Default-Start:     2 3 5
-# Default-Stop:      0 1 6
-# Description:       Save/Restore ALSA mixer settings
-### END INIT INFO
 
 function RestoreSettings {
   if test -f /etc/asound.state ; then
